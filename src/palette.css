@@ -3,4 +3,8 @@
 }
 .palette-color{
     height: 90%;
+    display:flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex-basis: 1;
 }

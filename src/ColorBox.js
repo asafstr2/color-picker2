@@ -1,11 +1,14 @@
-import React from 'react'
-import "./ColorBox.css"
+import React from 'react';
+import './ColorBox.css';
 export default function ColorBox(props) {
-    return (
-        <div style={{background:props.background}} className="ColorBox">
-            <span>{props.name}</span>
-            <span>More</span>
-            
-        </div>
-    )
+	const { name, background } = props;
+	return (
+		<div style={{ background }} className="ColorBox">
+				<div className="box-container">
+					<span>{name}</span>
+				</div>
+                <button className="copy-button"> Copy</button>
+            <span className="see-more">More</span>
+		</div>
+	);
 }
