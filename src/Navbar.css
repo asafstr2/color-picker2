@@ -4,6 +4,7 @@ align-items: center;
 justify-content: flex-start;
 height: 6vh;
 }
+
 .logo{
     padding: 0 13px;
     background-color: #eceff1;
@@ -13,6 +14,12 @@ height: 6vh;
     display: flex;
     align-items: center;
 }
+
+.logo i{
+    font-size: 3rem;
+}
+
+
 .slider{
     width:15%;
     margin:0 10px;
@@ -26,7 +33,7 @@ div .rc-slider-track
 
 div .rc-slider-rail
 {
-    height: 10px;
+    height: 15px;
 }
 
 
@@ -39,6 +46,6 @@ div .rc-slider-handle:focus
     outline: none;
     border: 2px solid green;
     box-shadow: none;
-    margin-top: 0.0001px;
+    margin-top: 0.1px;
 }
 
