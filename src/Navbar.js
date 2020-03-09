@@ -21,7 +21,7 @@ state={
   };
 
   render() {
-    const { level, changeLevel, handleChange } = this.props;
+    const { level, changeLevel } = this.props;
     const { format } = this.state;
     return (
       <header className="Navbar">
@@ -40,11 +40,8 @@ state={
           />
         </div>
         <div className="select-container">
-          <InputLabel id="demo-controlled-open-select-label">Color</InputLabel>
-          <Select onChange={this.handleChange}>
-            <MenuItem value={format}>
-              <em>None</em>
-            </MenuItem>
+          <Select value={format} onChange={this.handleChange}>
+           
             <MenuItem value="hex">hex</MenuItem>
             <MenuItem value="rgb">rgb</MenuItem>
             <MenuItem value="rgba">rgba</MenuItem>
