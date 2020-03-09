@@ -14,7 +14,7 @@ function App() {
 
 <div>
     
-<Palette {...seedColor[4]}></Palette>
+<Palette  palette={generatePalette(seedColor[4])}></Palette>
 
       
       </div>
