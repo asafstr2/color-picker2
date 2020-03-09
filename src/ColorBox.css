@@ -124,7 +124,8 @@
     width:100vw;
     text-align: center;
     color:white;
-    font-size: 3rem;
+    font-size: 2rem;
     letter-spacing: 1px;
 	line-height: 150px;
+	font-weight: 100;
 }
