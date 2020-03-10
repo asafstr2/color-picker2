@@ -55,7 +55,7 @@ export default [
   {
     paletteName: "Flat UI Colors Dutch",
     id: "flat-ui-colors-dutch",
-    emoji: "🇳🇱",
+    emoji: "🇳🇱" ,
     colors: [
       { name: "Sunflower", color: "#FFC312" },
       { name: "Energos", color: "#C4E538" },
@@ -109,7 +109,7 @@ export default [
   {
     paletteName: "Flat UI Colors Aussie",
     id: "flat-ui-colors-aussie",
-    emoji: "🇦🇺",
+    emoji: "🌈",
     colors: [
       { name: "Beekeeper", color: "#f6e58d" },
       { name: "SpicedNectarine", color: "#ffbe76" },

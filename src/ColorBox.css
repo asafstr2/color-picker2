@@ -69,6 +69,8 @@
 	position: fixed;
 	visibility: hidden;
 	z-index: 0;
+	overflow: hidden;
+
 }
 
 .copy-overley-true {
@@ -88,6 +90,8 @@
 	position: fixed;
 	visibility: hidden;
 	transform: scale(0.1);
+	overflow: hidden;
+
 }
 
 .copy-msg-true {
@@ -104,6 +108,7 @@
 	transform: scale(1);
 	transition: all 0.4s ease-in-out;
 	transition-delay: 0.3s ;
+	overflow: hidden;
 	
 	
 }
