@@ -6,7 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 
 import "rc-slider/assets/index.css";
-import { Route, Switch, Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./Navbar.css";
 class Navbar extends Component {
