@@ -11,11 +11,10 @@ function findPalette(id) {
 }
 
 function App() {
-	console.log(generatePalette(seedColor[4]));
 	return (
 		<div>
 			<Switch>
-				<Route exact path="/" render={() => <Palettelist  palette={seedColor} />} />
+				<Route exact path="/" render={(routeProps) => <Palettelist  palette={seedColor}{...routeProps} />} />
 				<Route
 					exact
 					path="/palette/:id"
