@@ -1,6 +1,5 @@
 .ColorBox {
 	width: 20%;
-	height: 25%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -21,7 +20,9 @@
 	opacity: 0;
 	cursor: pointer;
 }
-
+.copy-button-single {
+margin-bottom: 50%;
+}
 .ColorBox:hover .copy-button {
 	opacity: 1;
 	transition: 0.5s;
@@ -134,3 +135,4 @@
 	line-height: 150px;
 	font-weight: 100;
 }
+

@@ -25,6 +25,16 @@ state={
   render() {
     const { level, changeLevel } = this.props;
     const { format,open ,handleClose} = this.state;
+    const slider =level?  <div className="slider">
+    <Slider
+      defaultValue={level}
+      min={100}
+      max={900}
+      step={100}
+      onAfterChange={changeLevel}
+    />
+  </div>
+  :""
     return (
       <header className="Navbar">
         <div className="logo">
@@ -32,15 +42,7 @@ state={
             <i className="fas fa-palette"></i>
           </NavLink>
         </div>
-        <div className="slider">
-          <Slider
-            defaultValue={level}
-            min={100}
-            max={900}
-            step={100}
-            onAfterChange={changeLevel}
-          />
-        </div>
+      {slider}
         <div className="select-container">
           <Select value={format} onChange={this.handleChange}>
            
