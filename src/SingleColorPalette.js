@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import ColorBox from "./ColorBox"
 import Navbar from "./Navbar"
 import { withStyles } from '@material-ui/core/styles';
-import {  Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
 const styles = {
     Palette: {
         height: "98vh"
-
     },
     paletteColor: {
         height: "90%",
@@ -32,15 +31,15 @@ const styles = {
         fontSize: "1.5rem",
         margin: "0 1rem"
     },
-    goBack:{
-            background: "black",
-            width: "20%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flexStart",
-            justifyContent: "spaceBetween",
+    goBack: {
+        background: "black",
+        width: "20%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flexStart",
+        justifyContent: "spaceBetween",
     },
-    copyButton:{
+    copyButton: {
         width: "5rem",
         alignSelf: "center",
         textAlign: "center",
@@ -53,21 +52,17 @@ const styles = {
         textTransform: "uppercase",
         borderRadius: "3px",
         cursor: "pointer",
-        margin:"auto",
-        "&:hover":{
+        margin: "auto",
+        "&:hover": {
             background: "rgba(255, 255, 255, 0.712)",
             transition: "0.2s",
-            color:"white"
-           
+            color: "white"
+
         }
     }
-  
+
 
 }
-
-
-
-
 class SingleColorPalette extends Component {
     constructor(props) {
         super(props)
@@ -98,10 +93,10 @@ class SingleColorPalette extends Component {
 
     render() {
         const { classes } = this.props
-        const { paletteName, emoji,id } = this.props.palette;
+        const { paletteName, emoji, id } = this.props.palette;
         const { format } = this.state;
         const colorBox = this._shades.map(color =>
-            <ColorBox colorId={color.id} background={color[format]} name={color.name} key={color.id} />
+            <ColorBox colorId={color.id} background={color[format]} name={color.name} key={color.name} />
         )
         return (
             <div className={classes.Palette}>

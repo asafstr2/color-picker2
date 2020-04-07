@@ -1,138 +1,140 @@
 .ColorBox {
-	width: 20%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: space-between;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 .copy-button {
-	width: 5rem;
-	align-self: center;
-	text-align: center;
-	outline: none;
-	background: rgba(255, 255, 255, 0.3);
-	border: none;
-	font-size: 1rem;
-	line-height: 30px;
-	color: white;
-	text-transform: uppercase;
-	border-radius: 3px;
-	opacity: 0;
-	cursor: pointer;
+  width: 5rem;
+  align-self: center;
+  text-align: center;
+  outline: none;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  font-size: 1rem;
+  line-height: 30px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 3px;
+  opacity: 0;
+  cursor: pointer;
 }
 .copy-button-single {
-margin-bottom: 50%;
+  margin-bottom: 50%;
 }
 .ColorBox:hover .copy-button {
-	opacity: 1;
-	transition: 0.5s;
+  opacity: 1;
+  transition: 0.5s;
 }
 .copy-button:hover {
-	background: rgba(255, 255, 255, 0.712);
-	transition: 0.2s;
+  background: rgba(255, 255, 255, 0.712);
+  transition: 0.2s;
 }
 .box-container {
-	font-size: 1.05rem;
-	text-transform: uppercase;
-	letter-spacing: 1px;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
+
+.light-text {
+	color:White;
+}
+
+.ColorBox .dark-text {
+	color:rgba(0,0,0,0.5);
+}
+
 .see-more {
-	align-self: flex-end;
-	width: 5rem;
-	text-align: center;
-	outline: none;
-	background: rgba(255, 255, 255, 0.3);
-	border: none;
-	font-size: 1rem;
-	line-height: 30px;
-	color: white;
-	text-transform: uppercase;
-	border-radius: 3px;
-	cursor: pointer;
-	opacity: 0;
+  align-self: flex-end;
+  width: 5rem;
+  text-align: center;
+  outline: none;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  font-size: 1rem;
+  line-height: 30px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0;
 }
 
 .ColorBox:hover .see-more {
-	opacity: 1;
-	transition: 1s;
+  opacity: 1;
+  transition: 1s;
 }
 .flexbox-fix {
-	display: flex;
-	flex-direction: row-reverse;
-	width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
 }
 .see-more:hover {
-	background: rgba(255, 255, 255, 0.712);
-	transition: 0.2s;
+  background: rgba(255, 255, 255, 0.712);
+  transition: 0.2s;
 }
 
 .copy-overley {
-	position: fixed;
-	visibility: hidden;
-	z-index: 0;
-	overflow: hidden;
-
+  position: fixed;
+  visibility: hidden;
+  z-index: 0;
+  overflow: hidden;
 }
 
 .copy-overley-true {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	opacity: 1;
-	z-index: 10;
-	width: 100vw;
-	height: 100vh;
-	transform: scale(15);
-	transition: transform 0.6s ease-in-out;
-	overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  transform: scale(15);
+  transition: transform 0.6s ease-in-out;
+  overflow: hidden;
 }
 
 .copy-msg {
-	position: fixed;
-	visibility: hidden;
-	transform: scale(0.1);
-	overflow: hidden;
-
+  position: fixed;
+  visibility: hidden;
+  transform: scale(0.1);
+  overflow: hidden;
 }
 
 .copy-msg-true {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-	z-index: 11;
-	transform: scale(1);
-	transition: all 0.4s ease-in-out;
-	transition-delay: 0.3s ;
-	overflow: hidden;
-	
-	
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+  transform: scale(1);
+  transition: all 0.4s ease-in-out;
+  transition-delay: 0.3s;
+  overflow: hidden;
 }
-.copy-msg-true h1{
-    width:100vw;
-    background: rgba(255, 255, 255, 0.212);
-    text-align: center;
-    color:white;
-    font-size: 5rem;
-    letter-spacing: 1px;
-	line-height: 150px;
-	text-transform: uppercase;
-	text-shadow: 1px 2px 2px black;
-
-	
+.copy-msg-true h1 {
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.212);
+  text-align: center;
+  color: white;
+  font-size: 5rem;
+  letter-spacing: 1px;
+  line-height: 150px;
+  text-transform: uppercase;
+  text-shadow: 1px 2px 2px black;
 }
-.copy-msg-true p{
-    width:100vw;
-    text-align: center;
-    color:white;
-    font-size: 2rem;
-    letter-spacing: 1px;
-	line-height: 150px;
-	font-weight: 100;
+.copy-msg-true p {
+  width: 100vw;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  line-height: 150px;
+  font-weight: 100;
 }
-
