@@ -1,11 +1,4 @@
-import React, { useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Link } from 'react-router-dom';
-import chroma from "chroma-js"
-import './ColorBox.css';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = {
+const style = {
     ColorBox: {
         width: "20%",
         display: "flex",
@@ -28,11 +21,8 @@ const styles = {
         opacity: "0",
         cursor: "pointer"
     },
-	copy_button_single: { marginBottom: "50%" },
-	
-	ColorBox_hover__copy_button: { opacity: "1", transition: "0.5s" },
-	
-	
+    copy_button_single: { marginBottom: "50%" },
+    ColorBox_hover__copy_button: { opacity: "1", transition: "0.5s" },
     copy_button_hover: {
         background: "rgba(255, 255, 255, 0.712)",
         transition: "0.2s"
@@ -126,45 +116,3 @@ const styles = {
         fontWeight: "100"
     }
 };
-
-
-function ColorBox(props) {
-	const [copied, setCopied] = useState(false);
-	const { name, background, colorId, paletteId ,classes} = props;
-	const isDarkColor = (chroma(background).luminance()) <= 0.08;
-	const isLightColor = (chroma(background).luminance()) >= 0.6;
-
-	let more = paletteId &&
-		<Link to={`/palette/${paletteId}/${colorId}`} style={{ textDecoration: 'none' }}>
-			<span className={`see-more ${isLightColor && "dark-text"}`}>More </span>
-		</Link>
-
-
-
-	return (
-		<div style={{ background }} className="ColorBox">
-			<div className="box-container">
-				<span className={isDarkColor && "light-text"} >{name}</span>
-			</div>
-			<CopyToClipboard
-				text={background}
-				onCopy={() => {
-					setCopied(true);
-					setTimeout(() => setCopied(false), 1500);
-				}}
-			>
-				<button className={`copy-button ${paletteId || "copy-button-single"} ${isLightColor && "dark-text"}`}> Copy</button>
-			</CopyToClipboard>
-			{more}
-
-			<div style={{ background }} className={`${!copied ? 'copy-overley' : 'copy-overley-true'}`} />
-
-			<div className={`${!copied ? 'copy-msg' : 'copy-msg-true'}`}>
-				<h1 className={isLightColor && "dark-text"}>Copied!</h1>
-				<p className={isLightColor && "dark-text"} >{background}</p>
-			</div>
-		</div>
-	);
-}
-
-export default withStyles(styles)(ColorBox);
