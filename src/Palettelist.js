@@ -24,7 +24,7 @@ const styles = {
 		display:"flex",
 		width:"100%",
 		justifyContent:"space-between",
-		collor:"white"
+		color:"white"
 		},
 	palette: {
 		boxSizing:"border-box",
