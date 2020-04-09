@@ -10,14 +10,23 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { SketchPicker, ChromePicker, PhotoshopPicker } from "react-color"
+import { ChromePicker } from "react-color"
 import { Button } from "@material-ui/core";
-
+import DraggableColorBox from"./DraggableColorBox"
 
 
 const drawerWidth = 400;
 
 const useStyles = makeStyles((theme) => ({
+  palette_color:{
+    height: "100%",
+    width:"100%",
+    display:"flex",
+    flexWrap: "wrap",
+    flexBasis: "1",
+    alignContent:"flex-start"
+
+},
   root: {
     display: "flex",
   },
@@ -57,8 +66,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
   },
   content: {
+    height: "calc(100vh - 64px)",
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(0.5),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -77,6 +87,9 @@ const useStyles = makeStyles((theme) => ({
 export default function NewPalette() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [currentColor, setCurrentColor] = React.useState('teal');
+  const [colors, setColors] = React.useState(['red','green']);
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -85,6 +98,8 @@ export default function NewPalette() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const colorBox =colors.map((color)=><DraggableColorBox color={color}></DraggableColorBox>)
 
   return (
     <div className={classes.root}>
@@ -137,14 +152,15 @@ export default function NewPalette() {
         <Button variant='contained' color='primary'> Random color</Button>
         </div>
         <ChromePicker
-          color='green'
-          onChangeComplete={newColor => console.log(newColor)}
+          color={currentColor}
+          onChangeComplete={newColor => setCurrentColor(newColor.hex)}
         />
-                <Button variant='contained' color='primary'> Add color</Button>
+                <Button variant='contained' color='primary' style={{backgroundColor:currentColor}} onClick={()=>setColors([...colors,currentColor])}> Add color</Button>
 
       </Drawer>
       <main className={clsx(classes.content, { [classes.contentShift]: open })}>
         <div className={classes.drawerHeader} />
+    <div className={classes.palette_color}>{colorBox}</div>
 
       </main>
     </div>
