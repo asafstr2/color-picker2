@@ -12,21 +12,21 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { ChromePicker } from "react-color"
 import { Button } from "@material-ui/core";
-import DraggableColorBox from"./DraggableColorBox"
-
+import DraggableColorBox from "./DraggableColorBox"
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator"
 
 const drawerWidth = 400;
 
 const useStyles = makeStyles((theme) => ({
-  palette_color:{
+  palette_color: {
     height: "100%",
-    width:"100%",
-    display:"flex",
+    width: "100%",
+    display: "flex",
     flexWrap: "wrap",
     flexBasis: "1",
-    alignContent:"flex-start"
+    alignContent: "flex-start"
 
-},
+  },
   root: {
     display: "flex",
   },
@@ -88,7 +88,8 @@ export default function NewPalette() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [currentColor, setCurrentColor] = React.useState('teal');
-  const [colors, setColors] = React.useState(['red','green']);
+  const [colors, setColors] = React.useState(['red', 'green']);
+  const [name, setName] = React.useState('name');
 
 
   const handleDrawerOpen = () => {
@@ -99,7 +100,7 @@ export default function NewPalette() {
     setOpen(false);
   };
 
-  const colorBox =colors.map((color)=><DraggableColorBox color={color}></DraggableColorBox>)
+  const colorBox = colors.map((color) => <DraggableColorBox color={color}></DraggableColorBox>)
 
   return (
     <div className={classes.root}>
@@ -147,20 +148,22 @@ export default function NewPalette() {
         <Divider />
 
         <Typography variant='h4'>Design your Palette</Typography>
-       <div>
-        <Button variant='contained' color='secondary'> Clear palette</Button>
-        <Button variant='contained' color='primary'> Random color</Button>
+        <div>
+          <Button variant='contained' color='secondary'> Clear palette</Button>
+          <Button variant='contained' color='primary'> Random color</Button>
         </div>
         <ChromePicker
           color={currentColor}
           onChangeComplete={newColor => setCurrentColor(newColor.hex)}
         />
-                <Button variant='contained' color='primary' style={{backgroundColor:currentColor}} onClick={()=>setColors([...colors,currentColor])}> Add color</Button>
-
+        <ValidatorForm>
+          <TextValidator value={name} onChange={(newName)=>setName(newName)}/>
+          <Button variant='contained' color='primary' style={{ backgroundColor: currentColor }} onClick={() => setColors([...colors, currentColor])}> Add color</Button>
+        </ValidatorForm>
       </Drawer>
       <main className={clsx(classes.content, { [classes.contentShift]: open })}>
         <div className={classes.drawerHeader} />
-    <div className={classes.palette_color}>{colorBox}</div>
+        <div className={classes.palette_color}>{colorBox}</div>
 
       </main>
     </div>
