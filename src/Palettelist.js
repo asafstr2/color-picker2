@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//  import {  Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 import MiniPalette from './MiniPalette';
@@ -24,7 +24,11 @@ const styles = {
 		display:"flex",
 		width:"100%",
 		justifyContent:"space-between",
-		color:"white"
+		color:"white",
+		alignItems:"center",
+		"& a":{
+			color:"white"
+		}
 		},
 	palette: {
 		boxSizing:"border-box",
@@ -47,17 +51,24 @@ class Palettelist extends Component {
 		const { palette, classes } = this.props;
 
 		return (
-			<div className={classes.root}>
-				<div className={classes.container}>
-					<nav className={classes.nav}>
-						<h1>react color</h1>
-					</nav>
-					<div className={classes.palette}>
-						{palette.map((palette) => <MiniPalette key={palette.id} {...palette}  handleClick={()=>this.goToPalette(palette.id)}/>)}
-					</div>
-				</div>
-			</div>
-		);
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <nav className={classes.nav}>
+            <h1>react color</h1>
+            <Link to="/palette/new">new palette</Link>
+          </nav>
+          <div className={classes.palette}>
+            {palette.map((palette) => (
+              <MiniPalette
+                key={palette.id}
+                {...palette}
+                handleClick={() => this.goToPalette(palette.id)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
 	}
 }
 

@@ -21,7 +21,6 @@ const styles = {
     PaletteFooter: {
         width: "100vw",
         background: "white",
-        // height: "5vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
