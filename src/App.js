@@ -7,6 +7,8 @@ import { generatePalette } from './ColorHelper';
 import Palettelist from './Palettelist';
 import NewPalette from "./NewPalette";
 import SingleColorPalette from "./SingleColorPalette";
+import NewPaletteTest from "./NewPaletteTest";
+
 function findPalette(id) {
 	return generatePalette(seedColor.find((palette) => palette.id === id));
 }
@@ -27,6 +29,13 @@ function App() {
           path="/palette/new"
           render={(routeProps) => (
             <NewPalette {...routeProps} />
+          )}
+        />
+            <Route
+          exact
+          path="/palette/new/test"
+          render={(routeProps) => (
+            <NewPaletteTest {...routeProps} />
           )}
         />
         <Route
