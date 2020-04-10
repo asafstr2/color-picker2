@@ -14,10 +14,7 @@ import { ChromePicker } from "react-color";
 import { Button } from "@material-ui/core";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import DraggebleColorList from "./DraggebleColorList";
-// import {arrayMove} from 'react-sortable-hoc';
 import arrayMove from "array-move";
-
-
 
 const drawerWidth = 400;
 
@@ -88,25 +85,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewPalette(props) {
-  const maxColorBox=20;
+  const maxColorBox = 20;
   const classes = useStyles();
   const [paletteName, setPaletteName] = React.useState("");
   const [open, setOpen] = React.useState(true);
   const [currentColor, setCurrentColor] = React.useState("teal");
-  const [colors, setColors] = React.useState(
-    [
-      { name: "red", color: "red" },
-      { name: "green", color: "green" },
-      { name: "magenta", color: "#800056" },
-      { name: "blue", color: "#004080" },
-      { name: "purple", color: "#800064" },
-      { name: "brown", color: "#803400" },
-      { name: "greenish", color: "#008040" },
-      { name: "yellow", color: "#dce43a" },
-      { name: "pink", color: "#e43a80" },
-      { name: "lightgreen", color: "#3ae468" },
-    ]
-  );
+  const [colors, setColors] = React.useState([
+    { name: "red", color: "red" },
+    { name: "green", color: "green" },
+    { name: "magenta", color: "#800056" },
+    { name: "blue", color: "#004080" },
+    { name: "purple", color: "#800064" },
+    { name: "brown", color: "#803400" },
+    { name: "greenish", color: "#008040" },
+    { name: "yellow", color: "#dce43a" },
+    { name: "pink", color: "#e43a80" },
+    { name: "lightgreen", color: "#3ae468" },
+  ]);
   const [name, setName] = React.useState("");
 
   useEffect(() => {
@@ -124,7 +119,7 @@ export default function NewPalette(props) {
         ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
       )
     );
-  }, [colors, currentColor,props.palettes]);
+  }, [colors, currentColor, props.palettes]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -137,7 +132,6 @@ export default function NewPalette(props) {
     let newArr = colors.filter((color) => color.name !== id);
     setColors(newArr);
   };
-
 
   const handleSubmit = (e) => {
     setColors([...colors, { name: name, color: currentColor }]);
@@ -154,18 +148,20 @@ export default function NewPalette(props) {
     props.savePalette(newPalette);
     props.history.push("/");
   };
-const onSortEnd = ({ oldIndex, newIndex }) => {
- setColors (
-     arrayMove(colors, oldIndex, newIndex),
-  );
-};
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setColors(arrayMove(colors, oldIndex, newIndex));
+  };
 
-const randomColor=()=>{
-  const allColors=props.palettes.map(p=>p.colors).flat();
-  let rand =Math.floor(Math.random()*allColors.length);
-  const randomColor=allColors[rand]
-  setColors([...colors,randomColor])
-}
+  const randomColor = () => {
+    const allColors = props.palettes.map((p) => p.colors).flat();
+    let rand = Math.floor(Math.random() * allColors.length);
+    let randomColor = allColors[rand];
+    while (colors.includes(randomColor)) { 
+      rand = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[rand];    
+    }
+    setColors([...colors, randomColor]);
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
