@@ -12,8 +12,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { ChromePicker } from "react-color";
 import { Button } from "@material-ui/core";
-import DraggableColorBox from "./DraggableColorBox";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import DraggebleColorList from "./DraggebleColorList";
+// import {arrayMove} from 'react-sortable-hoc';
+import arrayMove from "array-move";
+
+
 
 const drawerWidth = 400;
 
@@ -84,14 +88,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewPalette(props) {
+  const maxColorBox=20;
   const classes = useStyles();
+  const [paletteName, setPaletteName] = React.useState("");
   const [open, setOpen] = React.useState(true);
   const [currentColor, setCurrentColor] = React.useState("teal");
-  const [colors, setColors] = React.useState([
-    { name: "red", color: "red" },
-    { name: "green", color: "green" },
-  ]);
-  const [name, setName] = React.useState("name1");
+  const [colors, setColors] = React.useState(
+    [
+      { name: "red", color: "red" },
+      { name: "green", color: "green" },
+      { name: "magenta", color: "#800056" },
+      { name: "blue", color: "#004080" },
+      { name: "purple", color: "#800064" },
+      { name: "brown", color: "#803400" },
+      { name: "greenish", color: "#008040" },
+      { name: "yellow", color: "#dce43a" },
+      { name: "pink", color: "#e43a80" },
+      { name: "lightgreen", color: "#3ae468" },
+    ]
+  );
+  const [name, setName] = React.useState("");
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isColorNameUniqe", (value) =>
@@ -103,7 +119,12 @@ export default function NewPalette(props) {
     ValidatorForm.addValidationRule("isColorUniqe", (value) =>
       colors.every(({ color }) => color.toLocaleLowerCase() !== currentColor)
     );
-  }, [colors, currentColor]);
+    ValidatorForm.addValidationRule("isPaletteNameUniqe", (value) =>
+      props.palettes.every(
+        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
+      )
+    );
+  }, [colors, currentColor,props.palettes]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -113,26 +134,17 @@ export default function NewPalette(props) {
     setOpen(false);
   };
   const deleteColorBox = (id) => {
-    let newArr=colors.filter(color=>color.name !==id);
-    setColors(newArr)
+    let newArr = colors.filter((color) => color.name !== id);
+    setColors(newArr);
   };
-  const colorBox = colors.map((color) => (
-    <DraggableColorBox
-      color={color.color}
-      name={color.name}
-      key={color.name}
-      delete={deleteColorBox}
-    >
-      {" "}
-    </DraggableColorBox>
-  ));
+
 
   const handleSubmit = (e) => {
     setColors([...colors, { name: name, color: currentColor }]);
     setName("");
   };
   const savePalette = () => {
-    let newName = "newPallete";
+    let newName = paletteName;
     const newPalette = {
       paletteName: newName,
       id: newName.toLocaleLowerCase().replace(/ /g, "-"),
@@ -142,7 +154,18 @@ export default function NewPalette(props) {
     props.savePalette(newPalette);
     props.history.push("/");
   };
+const onSortEnd = ({ oldIndex, newIndex }) => {
+ setColors (
+     arrayMove(colors, oldIndex, newIndex),
+  );
+};
 
+const randomColor=()=>{
+  const allColors=props.palettes.map(p=>p.colors).flat();
+  let rand =Math.floor(Math.random()*allColors.length);
+  const randomColor=allColors[rand]
+  setColors([...colors,randomColor])
+}
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -166,9 +189,22 @@ export default function NewPalette(props) {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
-          <Button variant="contained" color="primary" onClick={savePalette}>
-            save palette
-          </Button>
+          <ValidatorForm onSubmit={savePalette}>
+            <TextValidator
+              value={paletteName}
+              onChange={(e) => setPaletteName(e.target.value)}
+              validators={["required", "isPaletteNameUniqe"]}
+              errorMessages={["this field is required", "name must be uniqe"]}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ backgroundColor: currentColor }}
+              type="submit"
+            >
+              save palette
+            </Button>
+          </ValidatorForm>
         </Toolbar>
       </AppBar>
       {/* ------------------------------------------Drawer-------------------------------------------------------------------------------------- */}
@@ -190,12 +226,19 @@ export default function NewPalette(props) {
 
         <Typography variant="h4">Design your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">
-            {" "}
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setColors([])}
+          >
             Clear palette
           </Button>
-          <Button variant="contained" color="primary">
-            {" "}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={randomColor}
+            disabled={colors.length >= maxColorBox}
+          >
             Random color
           </Button>
         </div>
@@ -219,6 +262,7 @@ export default function NewPalette(props) {
             color="primary"
             style={{ backgroundColor: currentColor }}
             type="submit"
+            disabled={colors.length >= maxColorBox}
           >
             {" "}
             Add color
@@ -227,7 +271,14 @@ export default function NewPalette(props) {
       </Drawer>
       <main className={clsx(classes.content, { [classes.contentShift]: open })}>
         <div className={classes.drawerHeader} />
-        <div className={classes.palette_color}>{colorBox}</div>
+        <div className={classes.palette_color}>
+          <DraggebleColorList
+            colors={colors}
+            deleteColorBox={deleteColorBox}
+            axis="xy"
+            onSortEnd={onSortEnd}
+          />
+        </div>
       </main>
     </div>
   );
