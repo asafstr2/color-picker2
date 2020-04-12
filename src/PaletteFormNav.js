@@ -13,6 +13,8 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Link } from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
 import SaveIcon from "@material-ui/icons/Save";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 export default function PaletteFormNav(props) {
   const {
@@ -22,8 +24,13 @@ export default function PaletteFormNav(props) {
     paletteName,
     setPaletteName,
     drawerWidth,
+    setpaletteEmoji,
   } = props;
   const [paletteSaved, setPaletteSaved] = React.useState(false);
+  const [PaletteEmojiSaved, setPaletteEmojiSaved] = React.useState(false);
+
+  
+
 
   const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -93,6 +100,18 @@ export default function PaletteFormNav(props) {
         },
       },
     },
+
+    emojipopup: {
+      display:"flex",
+      flexDirection:"column",
+      borderRadius: "5px",
+      position: "fixed",
+      bottom: "20%",
+      right: "40%",
+      border: "3px solid #f1f1f1",
+      zIndex: "9",
+    },
+ 
     backdrop: {
       zIndex: "8",
       color: "#fff",
@@ -101,9 +120,29 @@ export default function PaletteFormNav(props) {
 
   const classes = useStyles();
 
+
+  const emoji = (
+<div className={classes.emojipopup}>
+  {/* <Typography variant="h4" className={classes.typography}>
+    Save Palette
+  </Typography> */}
+  <Picker set="apple" onSelect={(addEmoji=>setpaletteEmoji(addEmoji))} emojiSize={25} title={"pick an Emoji"}/>
+  <Button variant="contained" color="primary"onClick={savePalette}>save</Button>
+  <Button
+    variant="contained"
+    color="secondary"
+    onClick={() => {
+      setPaletteEmojiSaved(false);
+      setPaletteName("");
+    }}>Cancel</Button>
+</div>
+  );
   const textVal = (
     <div className={classes.popup}>
-      <ValidatorForm onSubmit={savePalette} className={classes.formContainer}>
+      <ValidatorForm onSubmit={()=>{;setPaletteSaved(false); setPaletteEmojiSaved(true);
+           }} className={classes.formContainer}>
+      {/* <ValidatorForm onSubmit={setPaletteEmoji(true)} className={classes.formContainer}> */}
+
         <Typography variant="h4" className={classes.typography}>
           Save Palette
         </Typography>
@@ -136,10 +175,12 @@ export default function PaletteFormNav(props) {
   return (
     <div>
       {paletteSaved && textVal}
+      {PaletteEmojiSaved && emoji}
+
       <Backdrop
         className={classes.backdrop}
-        open={paletteSaved}
-        onClick={() => setPaletteSaved(false)}
+        open={paletteSaved|| PaletteEmojiSaved}
+        onClick={() => {setPaletteSaved(false);setPaletteEmojiSaved(false)}}
       />
       <CssBaseline />
       <AppBar

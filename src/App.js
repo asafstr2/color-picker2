@@ -8,14 +8,27 @@ import Palettelist from "./Palettelist";
 import NewPalette from "./NewPalette";
 import SingleColorPalette from "./SingleColorPalette";
 
+
 function App() {
-  const [palettes, setPalette] = React.useState(seedColor );
+  
+  const savePalettes=JSON.parse(window.localStorage.getItem("palettes"))
+  const [palettes, setPalette] = React.useState(savePalettes || seedColor );
+
   function findPalette(id) {
     return generatePalette(palettes.find((palette) => palette.id === id));
   }
-  const savePalette = (NewPalette) => {
-  setPalette([...palettes,NewPalette])  
+
+  React.useEffect(() => {
+    syncLocalStorage() 
+  },[palettes])
+
+  const savePalette =  (NewPalette) => {
+    setPalette([...palettes,NewPalette])  
 };
+
+const syncLocalStorage=()=>{
+  window.localStorage.setItem("palettes",JSON.stringify(palettes));
+}
 
   return (
     <div>

@@ -85,6 +85,7 @@ export default function NewPalette(props) {
   const maxColorBox = 20;
   const classes = useStyles();
   const [paletteName, setPaletteName] = React.useState("");
+  const [paletteEmoji, setpaletteEmoji] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [colors, setColors] = React.useState([
     { name: "red", color: "red" },
@@ -127,7 +128,7 @@ export default function NewPalette(props) {
     const newPalette = {
       paletteName: newName,
       id: newName.toLocaleLowerCase().replace(/ /g, "-"),
-      emoji: "🎨",
+      emoji: paletteEmoji.native,
       colors: colors,
     };
     props.savePalette(newPalette);
@@ -158,6 +159,8 @@ export default function NewPalette(props) {
         paletteName={paletteName}
         setPaletteName={setPaletteName}
         drawerWidth={drawerWidth}
+        paletteEmoji={paletteEmoji}
+        setpaletteEmoji={setpaletteEmoji}
       />
       {/* ------------------------------------------Drawer-------------------------------------------------------------------------------------- */}
       <Drawer
