@@ -148,7 +148,6 @@ export default function PaletteFormNav(props) {
         </Typography>
         <TextValidator
           variant="outlined"
-          focused={true}
           label="Palette Name"
           value={paletteName}
           onChange={(e) => setPaletteName(e.target.value)}

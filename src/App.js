@@ -17,18 +17,14 @@ function App() {
   function findPalette(id) {
     return generatePalette(palettes.find((palette) => palette.id === id));
   }
-
   React.useEffect(() => {
-    syncLocalStorage() 
+    window.localStorage.setItem("palettes",JSON.stringify(palettes));
   },[palettes])
 
   const savePalette =  (NewPalette) => {
     setPalette([...palettes,NewPalette])  
 };
 
-const syncLocalStorage=()=>{
-  window.localStorage.setItem("palettes",JSON.stringify(palettes));
-}
 
   return (
     <div>
