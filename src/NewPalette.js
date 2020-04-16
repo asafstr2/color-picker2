@@ -88,16 +88,15 @@ export default function NewPalette(props) {
   const [paletteEmoji, setpaletteEmoji] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [colors, setColors] = React.useState([
-    { name: "red", color: "red" },
-    { name: "green", color: "green" },
-    { name: "magenta", color: "#800056" },
-    { name: "blue", color: "#004080" },
-    { name: "purple", color: "#800064" },
-    { name: "brown", color: "#803400" },
-    { name: "greenish", color: "#008040" },
-    { name: "yellow", color: "#dce43a" },
-    { name: "pink", color: "#e43a80" },
-    { name: "lightergreen", color: "#3ae468" },
+    { name: "Beekeeper", color: "#f6e58d" },
+    { name: "DeepKoamaru", color: "#30336b" },
+    { name: "TomatoRed", color: "#eb2f06" },
+    { name: "LuckyPoint", color: "#2c2c54" },
+    { name: "SyntheticPumpkin", color: "#ff793f" },
+    { name: "NasturcianFlower", color: "#e84118" },
+    { name: "DownloadProgress", color: "#4cd137" },
+    { name: "BaraRose", color: "#ED4C67" },
+    { name: "purple", color: "#9C27B0" }
   ]);
 
   useEffect(() => {
@@ -143,10 +142,16 @@ export default function NewPalette(props) {
     const allColors = props.palettes.map((p) => p.colors).flat();
     let rand = Math.floor(Math.random() * allColors.length);
     let randomColor = allColors[rand];
-    while (colors.includes(randomColor)) {
-      rand = Math.floor(Math.random() * allColors.length);
-      randomColor = allColors[rand];
-    }
+
+let check=true
+    while (check) {
+                    // eslint-disable-next-line
+                    if (colors.some((color) => color.name === randomColor.name)) {
+                      console.log(colors,randomColor)
+                      rand = Math.floor(Math.random() * allColors.length);
+                      randomColor = allColors[rand];
+                    } else check = false;
+                  }
     setColors([...colors, randomColor]);
   };
   return (
@@ -226,3 +231,8 @@ export default function NewPalette(props) {
     </div>
   );
 }
+
+
+
+
+ 

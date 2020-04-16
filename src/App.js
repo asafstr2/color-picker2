@@ -4,7 +4,7 @@ import Palette from "./Palette";
 import seedColor from "./seedColors";
 import { Route, Switch } from "react-router-dom";
 import { generatePalette } from "./ColorHelper";
-import Palettelist from "./Palettelist";
+import PaletteList from "./Palettelist";
 import NewPalette from "./NewPalette";
 import SingleColorPalette from "./SingleColorPalette";
 
@@ -24,7 +24,11 @@ function App() {
   const savePalette =  (NewPalette) => {
     setPalette([...palettes,NewPalette])  
 };
+  const deletePalette=(id)=> {
+	let mid = palettes.filter((pallete) => pallete.id !== id);
+  setPalette(mid);
 
+  }
 
   return (
     <div>
@@ -33,7 +37,7 @@ function App() {
           exact
           path="/"
           render={(routeProps) => (
-            <Palettelist palette={palettes} {...routeProps} />
+            <PaletteList deletePalette={deletePalette} palette={palettes} {...routeProps} />
           )}
         />
         <Route

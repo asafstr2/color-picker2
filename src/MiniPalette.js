@@ -9,8 +9,9 @@ const styles = {
     padding: "0.5rem",
     position: "relative",
     overflow: "Hidden",
-    "&:hover": {
-      cursor: "pointer",
+    "&:hover div": {
+      position: "relative",
+      transition: "3s",
     },
   },
   colors: {
@@ -20,6 +21,9 @@ const styles = {
     width: "100%",
     borderRadius: "5px",
     overflow: "Hidden",
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
   title: {
     display: "flex",
@@ -38,6 +42,28 @@ const styles = {
     width: "20%",
     height: "1.6rem",
   },
+  delete: {
+    opacity: "0",
+    marginLeft: "auto",
+    transition: "0.5s",
+    "&:hover": {
+      cursor: "pointer",
+    },
+    "& span": {
+      opacity: "1",
+    },
+  },
+  deleteDiv: {
+    position: "absolute",
+    display: "flex",
+    width: "100%",
+    transition: "0.5s",
+
+    "&:hover span": {
+      opacity: "1",
+      transition: "0.5s",
+    },
+  },
 };
 
 function MiniPalette(props) {
@@ -51,13 +77,17 @@ function MiniPalette(props) {
   ));
 
   return (
-    <div className={classes.root} onClick={props.handleClick}>
-        <div>
-            
-        </div>
-      <div className={classes.colors}>{miniColorBox}</div>
+    <div className={classes.root}>
+      <div className={classes.deleteDiv}>
+        <span className={classes.delete} onClick={props.handleDelete}>
+          x
+        </span>
+      </div>
+      <div className={classes.colors} onClick={props.handleClick}>
+        {miniColorBox}
+      </div>
       <h5 className={classes.title}>
-        {paletteName} <span className={classes.emoji}>{emoji}</span>
+        {paletteName} <span className={classes.emoji}>{emoji} </span>
       </h5>
     </div>
   );

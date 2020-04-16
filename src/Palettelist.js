@@ -43,14 +43,18 @@ const styles = {
 
 
 class Palettelist extends Component {
-	goToPalette(id){
-		this.props.history.push(`/palette/${id}`)
-	}
+  goToPalette(id) {
+    this.props.history.push(`/palette/${id}`);
+  }
 
-	render() {
-		const { palette, classes } = this.props;
+ 
 
-		return (
+
+
+  render() {
+    const { palette, classes, deletePalette } = this.props;
+
+    return (
       <div className={classes.root}>
         <div className={classes.container}>
           <nav className={classes.nav}>
@@ -63,13 +67,14 @@ class Palettelist extends Component {
                 key={palette.id}
                 {...palette}
                 handleClick={() => this.goToPalette(palette.id)}
+                handleDelete={() => deletePalette(palette.id)}
               />
             ))}
           </div>
         </div>
       </div>
     );
-	}
+  }
 }
 
 
