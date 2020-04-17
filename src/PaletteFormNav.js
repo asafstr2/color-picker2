@@ -123,9 +123,7 @@ export default function PaletteFormNav(props) {
 
   const emoji = (
 <div className={classes.emojipopup}>
-  {/* <Typography variant="h4" className={classes.typography}>
-    Save Palette
-  </Typography> */}
+
   <Picker set="apple" onSelect={(addEmoji=>setpaletteEmoji(addEmoji))} emojiSize={25} title={"pick an Emoji"}/>
   <Button variant="contained" color="primary"onClick={savePalette}>save</Button>
   <Button
@@ -141,7 +139,6 @@ export default function PaletteFormNav(props) {
     <div className={classes.popup}>
       <ValidatorForm onSubmit={()=>{;setPaletteSaved(false); setPaletteEmojiSaved(true);
            }} className={classes.formContainer}>
-      {/* <ValidatorForm onSubmit={setPaletteEmoji(true)} className={classes.formContainer}> */}
 
         <Typography variant="h4" className={classes.typography}>
           Save Palette
