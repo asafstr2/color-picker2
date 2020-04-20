@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     flexBasis: "1",
     alignContent: "flex-start",
     [sizes.down("xs")]:{
+      marginTop:"5px",
       height: "90%",
     },
   },
