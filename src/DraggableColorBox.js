@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {SortableElement } from "react-sortable-hoc";
+import sizes from "./styles/sizes";
 
 
 const styles = {
@@ -23,6 +24,17 @@ const styles = {
         transform:"scale(1.2)"
       },
     },
+    [sizes.down("md")]:{
+      width: "50%",
+      height: props=>`${200/props.length}%`,
+      maxHeight:"30%"
+
+    },
+     [sizes.down("xs")]:{
+      width: "100%",
+      height: props=>`${100/props.length}%`,
+      maxHeight:"30%"
+    },
   },
   ColorBox_text: {
     width: "100%",
@@ -33,12 +45,11 @@ const styles = {
 };
 
 const  DraggableColorBox=SortableElement((props)=> {
-  const { color, classes,name } = props;
+  const { color, classes,name} = props;
   return (
     <div className={classes.ColorBox} style={{ backgroundColor: color }}>
       <div className={classes.ColorBox_text}>
         <span>{name}</span>{" "}
-        
           <DeleteIcon
             className={classes.icon}
             onClick={() => props.delete(props.name)}

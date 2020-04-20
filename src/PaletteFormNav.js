@@ -15,6 +15,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import SaveIcon from "@material-ui/icons/Save";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
+import sizes from "./styles/sizes";
 
 export default function PaletteFormNav(props) {
   const {
@@ -29,7 +30,12 @@ export default function PaletteFormNav(props) {
   const [paletteSaved, setPaletteSaved] = React.useState(false);
   const [PaletteEmojiSaved, setPaletteEmojiSaved] = React.useState(false);
 
-  
+  const Cancelmerge =()=>{
+    const paletteToMerge=JSON.parse(window.sessionStorage.getItem("paletteBackup"));
+    const savePalettes = JSON.parse(window.localStorage.getItem("palettes"));
+    savePalettes.push(paletteToMerge)
+    props.setPalette(paletteToMerge)
+  } 
 
 
   const useStyles = makeStyles((theme) => ({
@@ -80,6 +86,21 @@ export default function PaletteFormNav(props) {
       zIndex: "9",
       width: "20%",
       height: "32%",
+      [sizes.down("lg")]:{
+        width: "20%",
+        height: "40%",
+      },
+      [sizes.down("md")]:{
+        width: "40%",
+        height: "40%",
+      },
+      [sizes.down("sm")]:{
+        minWidth: "200px",
+        width: "50%",
+        height: "40%",
+        right: "25%",
+
+      },
     },
     formContainer: {
       display: "flex",
@@ -132,6 +153,7 @@ export default function PaletteFormNav(props) {
     onClick={() => {
       setPaletteEmojiSaved(false);
       setPaletteName("");
+      
     }}>Cancel</Button>
 </div>
   );
@@ -210,7 +232,7 @@ export default function PaletteFormNav(props) {
             >
               save
             </Button>
-            <Link to="/" style={{ textDecoration: "none", marginLeft: "5px" }}>
+            <Link to="/" style={{ textDecoration: "none", marginLeft: "5px" }} onClick={()=>Cancelmerge()}>
               <Button
                 variant="contained"
                 color="secondary"

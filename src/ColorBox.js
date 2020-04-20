@@ -3,6 +3,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import chroma from "chroma-js";
 import { withStyles } from "@material-ui/core/styles";
+import sizes from "./styles/sizes";
 
 function colorHue(BgColor) {
                              let BrightenessTreshHold = 0.3; //adjust to get to white faster highr value =more white 
@@ -25,9 +26,23 @@ const styles = {
       opacity: "1",
       transition: "0.5s",
     },
+
+    "& button:nth-child(1)": {
+      [sizes.down("sm")]:{
+        opacity:"1",      },
+    },
+    [sizes.down("sm")]:{
+      width:"50%",
+    
+    },
+    [sizes.down("xs")]:{
+      width:"100%",
+      height:props=>(props.paletteId?"default":"20%")
+    },
+
   },
   copy_button: {
-    marginBottom: (props) => (props.paletteId ? "0" : "50%"),
+    margin: (props) => (props.paletteId ? "0" : "auto"),
     width: "5rem",
     alignSelf: "center",
     textAlign: "center",

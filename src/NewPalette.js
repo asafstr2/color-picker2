@@ -12,6 +12,12 @@ import DraggebleColorList from "./DraggebleColorList";
 import arrayMove from "array-move";
 import PaletteFormNav from "./PaletteFormNav";
 import ColorPicker from "./ColorPicker";
+import sizes from "./styles/sizes";
+
+
+
+
+
 
 const drawerWidth = 300;
 
@@ -52,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: "#f2f5f6",
+    [sizes.down("xs")]:{
+      width: "100vw",
+
+    },
   },
   drawerHeader: {
     backgroundColor: "#e4e8e9",
@@ -71,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
+   
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -82,12 +93,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewPalette(props) {
+  const paletteid = JSON.parse(window.sessionStorage.getItem("paletteid"));
+
+
   const maxColorBox = 20;
   const classes = useStyles();
   const [paletteName, setPaletteName] = React.useState("");
   const [paletteEmoji, setpaletteEmoji] = React.useState("");
   const [open, setOpen] = React.useState(false);
-  const [colors, setColors] = React.useState([
+  const [colors, setColors] = React.useState(paletteid||[
     { name: "Beekeeper", color: "#f6e58d" },
     { name: "DeepKoamaru", color: "#30336b" },
     { name: "TomatoRed", color: "#eb2f06" },
@@ -153,6 +167,8 @@ let check=true
                     } else check = false;
                   }
     setColors([...colors, randomColor]);
+   
+
   };
   return (
     <div className={classes.root}>
@@ -166,6 +182,7 @@ let check=true
         drawerWidth={drawerWidth}
         paletteEmoji={paletteEmoji}
         setpaletteEmoji={setpaletteEmoji}
+        setPalette={ props.savePalette}
       />
       {/* ------------------------------------------Drawer-------------------------------------------------------------------------------------- */}
       <Drawer

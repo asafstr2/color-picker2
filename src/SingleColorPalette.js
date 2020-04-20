@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import ColorBox from "./ColorBox"
 import Navbar from "./Navbar"
-import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import sizes from "./styles/sizes";
+import Page from "./Page";
 
 
 
@@ -15,7 +17,11 @@ const styles = {
         display: "flex",
         flexWrap: "wrap",
         flexGrow: "1",
-        flexBasis: "2"
+        flexBasis: "2",
+        [sizes.down("sm")]:{
+            overflowX: "hidden",
+            overflowY:"scroll"
+          },
     },
 
     PaletteFooter: {
@@ -34,9 +40,12 @@ const styles = {
         background: "black",
         width: "20%",
         display: "flex",
-        flexDirection: "column",
-        alignItems: "flexStart",
-        justifyContent: "spaceBetween",
+        [sizes.down("sm")]:{
+            width: "50%",
+          },
+          [sizes.down("xs")]:{
+            width: "auto",
+          },
     },
     copyButton: {
         width: "5rem",
@@ -66,7 +75,6 @@ class SingleColorPalette extends Component {
     constructor(props) {
         super(props)
         this._shades = this.gatherShades(this.props.palette, this.props.colorId);
-        console.log(this._shades)
     }
     state = {
         format: 'hex'
@@ -98,6 +106,7 @@ class SingleColorPalette extends Component {
             <ColorBox colorId={color.id} background={color[format]} name={color.name} key={color.name} />
         )
         return (
+            <Page>
             <div className={classes.Palette}>
                 <Navbar handleChange={this.handleChange} />
                 <div className={classes.paletteColor}>
@@ -112,6 +121,7 @@ class SingleColorPalette extends Component {
                     </footer>
                 </div>
             </div>
+            </Page>
         )
     }
 }

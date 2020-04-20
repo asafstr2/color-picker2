@@ -15,8 +15,9 @@ import DraggableColorBox from "./DraggableColorBox";
          alignContent: "flex-start",
        }}
      >
-       {colors.map((color, i) => (
+       {colors.map((color, i,colors) => (
          <DraggableColorBox
+          length={colors.length}
            index={i}
            color={color.color}
            name={color.name}

@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import { withStyles } from "@material-ui/core/styles";
+import sizes from "./styles/sizes";
 
 
 
 
 const styles= {
 	Palette:{
-    height: "98vh"
+    display:"flex",
+    flexDirection:"column",
+    height: "98vh",
+    
 },
 palette_color:{
     height: "90%",
@@ -16,6 +20,14 @@ palette_color:{
     flexWrap: "wrap",
     flexGrow: "1",
     flexBasis: "1",
+    overflow: "hidden",
+
+    [sizes.down("sm")]:{
+      overflowX: "hidden",
+      overflowY:"scroll"
+    },
+    
+
 },
 
 Palette_footer:{
@@ -25,6 +37,7 @@ Palette_footer:{
     alignItems: "center",
     justifyContent: "center",
     fontWeight: "bold",
+    
 },
 emoji:{
     fontSize: "1.5rem",
