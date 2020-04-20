@@ -100,6 +100,14 @@ export default function PaletteFormNav(props) {
         height: "40%",
         right: "25%",
       },
+      [sizes.down("xs")]: {
+        minWidth: "200px",
+        width: "50%",
+        minHeight: "400px",
+        height: "40%",
+        top:"20%",
+        right: "25%",
+      },
     },
     formContainer: {
       display: "flex",
