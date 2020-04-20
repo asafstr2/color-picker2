@@ -10,6 +10,8 @@ const styles = {
     borderRadius: "5px",
     padding: "0.5rem",
     position: "relative",
+    transition: "0.4s ease-in-out",
+
     "&:hover svg": {
       opacity:"1",
     },
@@ -17,6 +19,11 @@ const styles = {
       [sizes.down("sm")]:{
         opacity:"1",      },
   
+    },
+    "&:hover": {
+      cursor: "pointer",
+      transform: "scale(1.1)",
+
     },
 
   },

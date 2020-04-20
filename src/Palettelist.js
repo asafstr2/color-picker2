@@ -58,6 +58,7 @@ const styles = {
     [sizes.down("xs")]: {
       gridTemplateColumns: "repeat(1,100%)",
     },
+  
   },
   backdrop: {
     zIndex: "8",
