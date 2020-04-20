@@ -99,7 +99,6 @@ export default function NewPalette(props) {
   const maxColorBox = 20;
   const classes = useStyles();
   const [paletteName, setPaletteName] = React.useState("");
-  const [paletteEmoji, setpaletteEmoji] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [colors, setColors] = React.useState(paletteid||[
     { name: "Beekeeper", color: "#f6e58d" },
@@ -136,12 +135,12 @@ export default function NewPalette(props) {
   const handleSubmit = (name, currentColor) => {
     setColors([...colors, { name: name, color: currentColor }]);
   };
-  const savePalette = () => {
+  const savePalette = (emoji) => {
     let newName = paletteName;
     const newPalette = {
       paletteName: newName,
       id: newName.toLocaleLowerCase().replace(/ /g, "-"),
-      emoji: paletteEmoji.native,
+      emoji: emoji.native,
       colors: colors,
     };
     props.savePalette(newPalette);
@@ -180,8 +179,7 @@ let check=true
         paletteName={paletteName}
         setPaletteName={setPaletteName}
         drawerWidth={drawerWidth}
-        paletteEmoji={paletteEmoji}
-        setpaletteEmoji={setpaletteEmoji}
+      
         setPalette={ props.savePalette}
       />
       {/* ------------------------------------------Drawer-------------------------------------------------------------------------------------- */}

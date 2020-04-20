@@ -25,18 +25,18 @@ export default function PaletteFormNav(props) {
     paletteName,
     setPaletteName,
     drawerWidth,
-    setpaletteEmoji,
   } = props;
   const [paletteSaved, setPaletteSaved] = React.useState(false);
   const [PaletteEmojiSaved, setPaletteEmojiSaved] = React.useState(false);
 
-  const Cancelmerge =()=>{
-    const paletteToMerge=JSON.parse(window.sessionStorage.getItem("paletteBackup"));
+  const Cancelmerge = () => {
+    const paletteToMerge = JSON.parse(
+      window.sessionStorage.getItem("paletteBackup")
+    );
     const savePalettes = JSON.parse(window.localStorage.getItem("palettes"));
-    savePalettes.push(paletteToMerge)
-    props.setPalette(paletteToMerge)
-  } 
-
+    savePalettes.push(paletteToMerge);
+    props.setPalette(paletteToMerge);
+  };
 
   const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -86,20 +86,19 @@ export default function PaletteFormNav(props) {
       zIndex: "9",
       width: "20%",
       height: "32%",
-      [sizes.down("lg")]:{
+      [sizes.down("lg")]: {
         width: "20%",
         height: "40%",
       },
-      [sizes.down("md")]:{
+      [sizes.down("md")]: {
         width: "40%",
         height: "40%",
       },
-      [sizes.down("sm")]:{
+      [sizes.down("sm")]: {
         minWidth: "200px",
         width: "50%",
         height: "40%",
         right: "25%",
-
       },
     },
     formContainer: {
@@ -123,16 +122,20 @@ export default function PaletteFormNav(props) {
     },
 
     emojipopup: {
-      display:"flex",
-      flexDirection:"column",
-      borderRadius: "5px",
+      display: "flex",
+      flexDirection: "column",
       position: "fixed",
       bottom: "20%",
       right: "40%",
-      border: "3px solid #f1f1f1",
       zIndex: "9",
+
+      [sizes.down("sm")]: {
+        minWidth: "200px",
+        right: "20%",
+        bottom: "10%",
+      },
     },
- 
+
     backdrop: {
       zIndex: "8",
       color: "#fff",
@@ -141,27 +144,26 @@ export default function PaletteFormNav(props) {
 
   const classes = useStyles();
 
-
+  let xs = window.innerWidth > 575.98 ? false : true;
   const emoji = (
-<div className={classes.emojipopup}>
-
-  <Picker set="apple" onSelect={(addEmoji=>setpaletteEmoji(addEmoji))} emojiSize={25} title={"pick an Emoji"}/>
-  <Button variant="contained" color="primary"onClick={savePalette}>save</Button>
-  <Button
-    variant="contained"
-    color="secondary"
-    onClick={() => {
-      setPaletteEmojiSaved(false);
-      setPaletteName("");
-      
-    }}>Cancel</Button>
-</div>
+    <div className={classes.emojipopup}>
+      <Picker
+        set="apple"
+        onSelect={(addEmoji) => savePalette(addEmoji)}
+        emojiSize={xs ? 15 : 25}
+        title={"pick an Emoji"}
+      />
+    </div>
   );
   const textVal = (
     <div className={classes.popup}>
-      <ValidatorForm onSubmit={()=>{;setPaletteSaved(false); setPaletteEmojiSaved(true);
-           }} className={classes.formContainer}>
-
+      <ValidatorForm
+        onSubmit={() => {
+          setPaletteSaved(false);
+          setPaletteEmojiSaved(true);
+        }}
+        className={classes.formContainer}
+      >
         <Typography variant="h4" className={classes.typography}>
           Save Palette
         </Typography>
@@ -197,8 +199,11 @@ export default function PaletteFormNav(props) {
 
       <Backdrop
         className={classes.backdrop}
-        open={paletteSaved|| PaletteEmojiSaved}
-        onClick={() => {setPaletteSaved(false);setPaletteEmojiSaved(false)}}
+        open={paletteSaved || PaletteEmojiSaved}
+        onClick={() => {
+          setPaletteSaved(false);
+          setPaletteEmojiSaved(false);
+        }}
       />
       <CssBaseline />
       <AppBar
@@ -232,7 +237,11 @@ export default function PaletteFormNav(props) {
             >
               save
             </Button>
-            <Link to="/" style={{ textDecoration: "none", marginLeft: "5px" }} onClick={()=>Cancelmerge()}>
+            <Link
+              to="/"
+              style={{ textDecoration: "none", marginLeft: "5px" }}
+              onClick={() => Cancelmerge()}
+            >
               <Button
                 variant="contained"
                 color="secondary"

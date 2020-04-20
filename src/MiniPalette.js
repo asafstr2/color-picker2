@@ -85,13 +85,14 @@ const styles = {
       cursor: "pointer",
       color:"#4894d7",
       transform: "scale(1.1)",
-
     },
+    [sizes.down("xs")]:{
+      left:"89%",     },
   },
 }
 
 function MiniPalette(props) {
-  const { classes, paletteName, emoji, colors,handleDelete ,handleEdit} = props;
+  const { classes, paletteName, colors,handleDelete ,handleEdit} = props;
   const miniColorBox = colors.map((color) => (
     <div
       className={classes.miniColor}
@@ -111,7 +112,8 @@ function MiniPalette(props) {
         {miniColorBox}
       </div>
       <h5 className={classes.title}>
-        {paletteName} <span className={classes.emoji}>{emoji} </span>
+        {paletteName} 
+        {/* <span className={classes.emoji}>{props.emoji} </span> */}
       </h5>
     </div>
   );
