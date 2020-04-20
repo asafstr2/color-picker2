@@ -30,12 +30,19 @@ export default function PaletteFormNav(props) {
   const [PaletteEmojiSaved, setPaletteEmojiSaved] = React.useState(false);
 
   const Cancelmerge = () => {
-    const paletteToMerge = JSON.parse(
-      window.sessionStorage.getItem("paletteBackup")
-    );
-    const savePalettes = JSON.parse(window.localStorage.getItem("palettes"));
-    savePalettes.push(paletteToMerge);
-    props.setPalette(paletteToMerge);
+    let paletteToMerge;
+    try{
+     paletteToMerge = JSON.parse(
+      window.sessionStorage.getItem("paletteBackup"));
+      if(paletteToMerge!==null){
+      console.log(paletteToMerge)
+      props.setPalette(paletteToMerge);}
+    }
+    catch(error) {
+      console.error(error);
+      
+    }
+   
   };
 
   const useStyles = makeStyles((theme) => ({

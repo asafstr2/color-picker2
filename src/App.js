@@ -103,9 +103,12 @@ function App(props) {
   };
 
   const editPalette=(id)=>{
-    const editColors=palettes.filter((pallete) => pallete.id === id);
+    
+   
+    let editColors=palettes.filter((pallete) => pallete.id === id);
     window.sessionStorage.setItem("paletteid", JSON.stringify(editColors[0].colors));
     window.sessionStorage.setItem("paletteBackup", JSON.stringify(editColors[0]));
+    console.log(editColors)
     setPalette(palettes.filter((pallete) => pallete.id !== id));
   }
   
