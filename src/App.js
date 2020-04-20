@@ -77,8 +77,8 @@ const styles = {
 function App(props) {
   const { classes } = props;
 
-  const savePalettes = JSON.parse(window.localStorage.getItem("palettes"));
-  const [palettes, setPalette] = React.useState(savePalettes || seedColor);
+  const savePalettes = window.localStorage.getItem("palettes")?JSON.parse(window.localStorage.getItem("palettes")):seedColor
+  const [palettes, setPalette] = React.useState(savePalettes );
   const [palettesToDelete, setpalettesToDelete] = React.useState(false);
 
   function findPalette(id) {
@@ -100,16 +100,16 @@ function App(props) {
     let mid = palettes.filter((pallete) => pallete.id !== palettesToDelete);
     setPalette(mid);
     setpalettesToDelete(false);
+    window.sessionStorage.removeItem("paletteBackup")
   };
 
   const editPalette=(id)=>{
-    
-   
     let editColors=palettes.filter((pallete) => pallete.id === id);
     window.sessionStorage.setItem("paletteid", JSON.stringify(editColors[0].colors));
     window.sessionStorage.setItem("paletteBackup", JSON.stringify(editColors[0]));
     console.log(editColors)
     setPalette(palettes.filter((pallete) => pallete.id !== id));
+    window.sessionStorage.removeItem("paletteBackup")
   }
   
 
