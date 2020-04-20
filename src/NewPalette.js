@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     flexBasis: "1",
     alignContent: "flex-start",
+    [sizes.down("xs")]:{
+      height: "90%",
+    },
   },
   root: {
     display: "flex",
